@@ -1,0 +1,2 @@
+1;Compania 1;Setor Industrial;Goiania;Goias;Brasil;3,;
+5;Compania 2;Av. Paulista;Sao Paulo;Sao Paulo;Brasil;6,;

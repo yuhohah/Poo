@@ -1,0 +1,2 @@
+3;Vaga 2;Para estagiarios que sabem C;10;700.5;;
+6;Vaga 3;Vaga para pessoas que entendem de python e automacao;10000;1000.0;7,;

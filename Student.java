@@ -1,70 +1,99 @@
-public class Student {
+import java.util.ArrayList;
+import java.util.List;
 
-    private String name;
-    private String registration;
-    private String situation;
-    private String birthDate;
-    private String yearOfEntry;
-    private Course course;
+public class Student extends Entity{
+  private String university;
+  private String course;
+  private List<Vacancy> myVacancies = new ArrayList<>();
 
-    public Student(){
+  public Student(String name, String university, String course){
+    super(name);
+    this.university = university;
+    this.course = course;
+  }
 
+  public Student(long id, String name, String university, String course){
+    super(name, id);
+    this.university = university;
+    this.course = course;
+  }
+
+  public String getUniversity(){
+    return university;
+  }
+
+  public void setUniversity(String university){
+    this.university = university;
+  }
+
+  public String getCourse(){
+    return course;
+  }
+
+  public void setCourse(String course){
+    this.course = course;
+  }
+  
+  public void addVacancy(Vacancy vacancy){
+    myVacancies.add(vacancy);
+  }
+
+  public void removeVacancy(Vacancy vacancy){
+    myVacancies.remove(vacancy);
+  }
+  
+  public void removeVacancy(Long id){
+    for(Vacancy vacancy: myVacancies){
+      if(vacancy.getId() == id){
+        removeVacancy(vacancy);
+      }
+    }
+  }
+
+  public String toStringFormatPrint(){
+    return ("{" + this.getName() + ";" + this.getId() + ";" + this.getUniversity() + ";" + this.getCourse() + "}");
+  }
+  public String myVacanciesIdList(){
+    String string = "";
+    for(Vacancy c: myVacancies){
+      string += c.getId() + ",";
     }
 
-    public Student(String name, String registration, String situation, String birthDate, String yearOfEntry, Course course) {
-        this.name = name;
-        this.registration = registration;
-        this.situation = situation;
-        this.birthDate = birthDate;
-        this.yearOfEntry = yearOfEntry;
-        this.course = course;
+    return string;
+  }
+  public String toStringWrite(){
+    return (getId() + ";" + this.getName() + ";" + this.university + ";" + this.course + ";" + myVacanciesIdList() + ";");
+  }
+  
+  public boolean myVacanciesListToScreen(){
+
+    int counter = 0;
+
+    for (Vacancy vacancy: myVacancies) { 
+      System.out.println(vacancy.toStringScreen());
+      counter ++;
     }
 
-    public String getName() {
-        return name;
+    if(counter == 0){
+    System.out.println("\nVocê não possui nenhuma aplicação a vagas de estágio.\n");
+      return false;
     }
+    else{
+      return true;
+    }
+  }
 
-    public String getRegistration() {
-        return registration;
+  public boolean containsVacancy(Vacancy vacancy){
+    if(myVacancies.contains(vacancy)){
+      return true;
     }
+    else{
+      return false;
+    }
+  }
 
-    public String getSituation() {
-        return situation;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public String getYearOfEntry() {
-        return yearOfEntry;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setRegistration(String registration) {
-        this.registration = registration;
-    }
-
-    public void setSituation(String situation) {
-        this.situation = situation;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public void setYearOfEntry(String yearOfEntry) {
-        this.yearOfEntry = yearOfEntry;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+  public String toStringScreen(){
+    return ("\nID: " + getId() + "\nNome: " + this.getName() + "\nUniversidade: " + this.university + "\nCurso: " + this.course);
+  }
 }
+
